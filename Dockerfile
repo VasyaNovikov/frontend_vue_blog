@@ -11,4 +11,8 @@ RUN npm install @vue/cli@5.0.8 -g
 
 COPY . /app
 
+<<<<<<< HEAD
 CMD npm run serve
+=======
+CMD npm run serve
+>>>>>>> a5a674a (starting 2 app with docker)
