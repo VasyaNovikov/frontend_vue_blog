@@ -15,5 +15,13 @@ npm run serve
 npm run build
 ```
 
+<<<<<<< HEAD
+=======
+### Lints and fixes files
+```
+npm run lint
+```
+
+>>>>>>> 3263eeb (starting 2 app with docker)
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
