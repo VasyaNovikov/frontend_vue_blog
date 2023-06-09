@@ -1,23 +1,21 @@
 <template>
   <div class="post" v-if="post">
-      <h2>{{ post.title }}: {{ post.subtitle }}</h2>
-      By <AuthorLink :author="post.author" />
-      <div>{{ displayableDate(post.publishDate) }}</div>
+    <h2>{{ post.title }}: {{ post.subtitle }}</h2>
     <p class="post__description">{{ post.metaDescription }}</p>
+    <div>{{ displayableDate(post.publishDate) }}</div>
     <article>
       {{ post.body }}
     </article>
-    <ul>
-      <li class="post__tags" v-for="tag in post.tags" :key="tag.name">
-        <router-link :to="`/tag/${tag.name}`">#{{ tag.name }}</router-link>
-      </li>
-    </ul>
+    <div class="post__btns" v-for="tag in post.tags" :key="tag.name">
+      <my-button style="margin-top: 10px; margin-bottom: 5px; background: #FFEBCD" @click="$router.push(`/tag/${tag.name}`)">#{{ tag.name }}</my-button>
+    </div>
+    <AuthorLink :author="post.author"/>
   </div>
 </template>
 
 <script>
 import gql from 'graphql-tag'
-import AuthorLink from '@/components/AuthorLink'
+import AuthorLink from '@/components/UI/AuthorLink'
 
 export default {
   name: 'VPost',
@@ -67,3 +65,19 @@ export default {
   },
 }
 </script>
+
+<style>
+.post {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: #F9F4F3;
+  box-shadow: 2px 2px 4px gray;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+article {
+  margin-top: 5px;
+}
+
+</style>

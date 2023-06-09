@@ -1,29 +1,30 @@
 <template>
   <div>
-    <ol class="post-list">
-      <li class="post" v-for="post in publishedPosts" :key="post.title">
-          <span class="post__title">
-            <router-link
-              :to="`/post/${post.slug}`"
-            >{{ post.title }}: {{ post.subtitle }}</router-link>
-          </span>
-          <span v-if="showAuthor">
-            by <AuthorLink :author="post.author" />
-          </span>
-          <div class="post__date">{{ displayableDate(post.publishDate) }}</div>
+    <div class="post-list">
+      <div class="post"
+        v-for="post in publishedPosts"
+        :key="post.title"
+      >
+        <span class="post__title">
+           <router-link :to="`/post/${post.slug}`">
+             {{ post.title }}: {{ post.subtitle }}
+           </router-link>
+        </span>
         <p class="post__description">{{ post.metaDescription }}</p>
-        <ul>
-          <li class="post__tags" v-for="tag in post.tags" :key="tag.name">
-            <router-link :to="`/tag/${tag.name}`">#{{ tag.name }}</router-link>
-          </li>
-        </ul>
-      </li>
-    </ol>
+        <div class="post__date">{{ displayableDate(post.publishDate) }}</div>
+        <span v-if="showAuthor">
+           author <AuthorLink :author="post.author" />
+        </span>
+        <div class="post__btns" v-for="tag in post.tags" :key="tag.name">
+           <my-button style="margin-top: 5px; background: #FFEBCD" @click="$router.push(`/tag/${tag.name}`)">#{{ tag.name }}</my-button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import AuthorLink from '@/components/AuthorLink'
+import AuthorLink from '@/components/UI/AuthorLink'
 
 export default {
   name: 'PostList',
@@ -62,10 +63,7 @@ export default {
   list-style: none;
 }
 
-.post {
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 1rem;
-}
+
 
 .post__title {
   font-size: 1.25rem;
@@ -76,7 +74,7 @@ export default {
   font-style: italic;
 }
 
-.post__tags {
+.post__btns {
   list-style: none;
   font-weight: bold;
   font-size: 0.8125rem;

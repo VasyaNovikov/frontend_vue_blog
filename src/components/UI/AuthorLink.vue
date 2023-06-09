@@ -1,7 +1,7 @@
 <template>
-  <router-link
-      :to="`/author/${author.user.username}`"
-  >{{ displayName }}</router-link>
+  <router-link :to="`/author/${author.user.username}`">
+    {{ displayName }}
+  </router-link>
 </template>
 
 <script>
@@ -24,3 +24,7 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+
+</style>

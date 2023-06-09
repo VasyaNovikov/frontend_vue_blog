@@ -1,28 +1,31 @@
 <template>
   <div>
-    <h2>Posts in #{{ $route.params.tag }}</h2>
-    <PostList :posts="posts" v-if="posts" />
+    <h2>Fresh published posts</h2>
+    <PostList
+      v-if="allPosts"
+      :posts="allPosts"
+    />
   </div>
 </template>
 
 <script>
 import gql from 'graphql-tag'
-import PostList from '@/components/PostList'
+import PostList from '@/components/UI/PostList'
 
 export default {
-  name: 'PostsByTag',
+  name: 'AllPosts',
   components: {
     PostList,
   },
   data () {
     return {
-      posts: null,
+        allPosts: null,
     }
   },
   async created () {
     const posts = await this.$apollo.query({
-      query: gql`query ($tag: String!) {
-        postsByTag(tag: $tag) {
+      query: gql`query {
+        allPosts {
           title
           subtitle
           publishDate
@@ -41,11 +44,8 @@ export default {
           }
         }
       }`,
-      variables: {
-        tag: this.$route.params.tag,
-      },
     })
-    this.posts = posts.data.postsByTag
+    this.allPosts = posts.data.allPosts
   },
 }
 </script>

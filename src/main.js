@@ -1,21 +1,10 @@
-<<<<<<< HEAD
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
-
-createApp(App).use(store).use(router).mount('#app')
-=======
-//import { createApp } from 'vue'
-//import App from './App.vue'
-//
-//createApp(App).mount('#app')
-
-import { createApp,h } from 'vue'
-import App from './App.vue'
-import router from './router'
+import router from '@/router'
+import components from '@/components/UI'
 import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 import { createApolloProvider } from '@vue/apollo-option'
+
 
 const cache = new InMemoryCache()
 
@@ -28,11 +17,14 @@ const apolloProvider = createApolloProvider({
   defaultClient: apolloClient,
 })
 
-const app = createApp({
-  render: () => h(App),
+const app = createApp(App)
+
+components.forEach(component => {
+    app.component(component.name, component)
 })
 
-app.use(router)
-app.use(apolloProvider)
-app.mount('#app')
->>>>>>> 3263eeb (starting 2 app with docker)
+app
+   .use(router)
+
+   .use(apolloProvider)
+   .mount('#app')

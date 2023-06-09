@@ -7,15 +7,13 @@
       rel="noopener noreferrer"
     >Website</a>
     <p>{{ author.bio }}</p>
-
-    <h3>Posts by {{ displayName }}</h3>
     <PostList :posts="author.postSet" :showAuthor="false" />
   </div>
 </template>
 
 <script>
 import gql from 'graphql-tag'
-import PostList from '@/components/PostList'
+import PostList from '@/components/UI/PostList'
 
 export default {
   name: 'VAuthor',
@@ -68,3 +66,14 @@ export default {
   },
 }
 </script>
+<style scoped>
+
+h2 {
+  margin-bottom: 5px;
+}
+PostList {
+
+}
+
+
+</style>
